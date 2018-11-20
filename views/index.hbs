@@ -1,0 +1,36 @@
+{{> header}}
+  
+  <h1>TV SPORED</h1>
+  <a href="/reload" method="post">REFRESH</a>
+  <br>
+
+  <a href="/programs/slo1" method="post" name="slo1">slo1</a>
+  <a href="/programs/natgeo" method="post" name="natgeo">natgeo</a>
+  <a href="/programs/poptv" method="post" name="poptv">poptv</a>
+
+  {{!-- 
+If startment runs if variable exists 
+or isn't assigned to an eempty value 
+--}}
+{{#if show_list}}
+<ul>
+    {{!-- 
+    In code below "each" interates over the "polls" property and 
+    "this.name" refers to the property inside the array of objects
+    --}}
+    {{#each show_list}}
+        <li>{{this.startTime}} - {{this.title}} - {{this.category}}</li>
+    {{/each}}
+</ul>
+  {{!-- 
+  Else startment runs if DOESN'T variable exist
+  or IS assigned to an eempty value 
+  --}}
+  {{else}}
+      <p><em>There are currently no polls.</em></p>
+  {{/if}}
+
+  {{> footer}}
+
+</body>
+</html>
