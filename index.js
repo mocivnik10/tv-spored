@@ -1,6 +1,6 @@
 const express = require('express')
 const hbs = require('hbs');
-const fs = require('fs'); 
+const fs = require('fs');
 const programs = require('./programs/programs')
 const util = require('util')
 
@@ -18,9 +18,11 @@ hbs.registerPartials(__dirname + '/views/partials')
 app.set('view engine', 'hbs')
 app.use(express.static(__dirname = './public'))
 
-app.get('/', async(req, res) => {
+app.get('/', async (req, res) => {
   res.render('index.hbs')
 })
+
+app.use(express.static('public'))
 
 app.get('/reload', async (req, res) => {
   programs.deleteFiles('programs/files')
@@ -29,7 +31,7 @@ app.get('/reload', async (req, res) => {
   res.redirect('/')
 })
 
-app.get('/programs/:program', async(req, res) => {
+app.get('/programs/:program', async (req, res) => {
   console.log(req.params)
 
   try {
@@ -38,7 +40,7 @@ app.get('/programs/:program', async(req, res) => {
     res.render('index.hbs', {
       show_list: list
     })
-  } catch(e) {
+  } catch (e) {
     console.log('ERROR', e)
     res.render('index.hbs')
   }
